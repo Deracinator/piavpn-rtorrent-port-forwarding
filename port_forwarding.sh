@@ -5,6 +5,16 @@
 # Usage:
 #  ./port_forwarding.sh
 
+## COLORS
+RESET="\e[0m"
+BOLD="\e[1m"
+RED="\e[31m"
+LIGHT_BLUE="\e[94m"
+LIGHT_RED="\e[91m"
+LIGHT_GREEN="\e[92m"
+LIGHT_YELLOW="\e[93m"
+###
+
 error( )
 {
   echo "$@" 1>&2
@@ -36,7 +46,7 @@ version( )
 
 port_forward_assignment( )
 {
-  echo 'Loading port forward assignment information...'
+  echo -e "${LIGHT_YELLOW}Loading port forward assignment information...${RESET}"
   if [ "$(uname)" == "Linux" ]; then
     client_id=`head -n 100 /dev/urandom | sha256sum | tr -d " -"`
   fi
@@ -47,17 +57,16 @@ port_forward_assignment( )
   json=`curl "http://209.222.18.222:2000/?client_id=$client_id" 2>/dev/null`
   
   if [ "$json" != "" ]; then
-    echo 'Updating rTorrent port range...'
+    echo -e "${LIGHT_BLUE}Updating ${BOLD}rTorrent ${RESET}${LIGHT_BLUE}port range...${RESET}"
     pure_port=`echo $json | tr -d '{"port":}'`
-    sed -i "s/network.port_range.set = .*/network.port_range.set = $pure_port-$pure_port/g" $HOME/.rtorrent.rc
+    sed -i "s/network.port_range.set = .*/network.port_range.set = ${pure_port}-${pure_port}/g" $HOME/.rtorrent.rc
   fi
   
   if [ "$json" == "" ]; then
-    json='Port forwarding is already activated on this connection, has expired, or you are not connected to a PIA region that supports port forwarding.
-    WARNING: rTorrent will use last assigned port!'
+	  json="${RED}Port forwarding is already activated on this connection, has expired, or you are not connected to a PIA region that supports port forwarding. ${BOLD}WARNING: rTorrent will use last assigned port!${RESET}"
   fi
 
-  echo $json
+  echo -e $json
 }
 
 EXITCODE=0
