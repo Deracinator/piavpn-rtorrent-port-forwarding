@@ -14,7 +14,7 @@ NOTE2: This script assumes that you're running it with the user that will run rT
 ```bash
 $ git clone https://github.com/Deracinator/piavpn-rtorrent-port-forwarding.git
 $ cd piavpn-rtorrent-port-forwarding/
-$ chmod +x port-forwarding
+$ chmod +x port-forwarding.sh
 $ ./port-forwarding.sh
 ```
 3. Supposing everything went well, you will see (as an example, obviously):
