@@ -1,4 +1,4 @@
-# THIS FILE IS CURRENTLY OUT-OF-DATE
+# THIS SCRIPT IS CURRENTLY OUT-OF-DATE
 
 # piavpn-rtorrent-port-forwarding
 Port forwarding script for PiaVpn with rTorrent compatibilty 
